@@ -1,2 +1,22 @@
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
+<div class="container">
+  <div class="top-image">
+    <div class="row titles">
+      <h1 class="text-center font">WeLoveNogizaka46</h1>
+      <h2 class="text-center a font">乃木坂４６の推しメンを共有しましょう</h2>
+    </div>
+    <div class="row top-ad">
+      <div class="buttons">
+        <span class="new-registration-button">
+          <%= link_to new_user_registration_path, class: "btn-partial-line" do %>
+            <i class="fa fa-caret-right"></i> 新規登録
+          <% end %>
+        </span>
+        <span class="login-button">
+          <%= link_to new_user_session_path, class: "btn-partial-line" do %>
+            <i class="fa fa-caret-right"></i> ログイン
+          <% end %>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

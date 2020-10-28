@@ -8,8 +8,21 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%= yield %>
+      <div class="header-test">
+        <%= render 'layouts/header'%>
+      </div>
+      <main class="main">
+        <%= yield %>
+      </main>
   </body>
+  <footer>
+    <div class="footer-logo">
+      <div class="col-xs-3"></div>
+      <div class="col-xs-6">
+        <div id="footer-area">©乃木坂46応援サイト</div>
+      </div>
+      <div class="col-xs-3"></div>
+    </div>
+  </footer>
 </html>
