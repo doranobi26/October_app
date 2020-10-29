@@ -1,12 +1,37 @@
-<div class="row post-form">
-  <div class="col-xs-1"></div>
-  <div class=" col-xs-10">
-    <h3 class="new_post">投稿編集</h3>
-      <% if @post.errors.any? %>
-        <%= render 'posts/alert', post: @post %>
-      <% end %>
-    <%= render 'posts/form', post: @post %>
-  </div>
-  <div class="col-xs-1"></div>
+<div class="container">
+    <div class="row">
+      <div class="col-xs-1"></div>
+      <div class=" col-xs-10">
+        <h3 class="profile-edit">プロフィール編集</h3>
+        <% if @user.errors.any? %>
+          <div class="alert alert-danger">
+            <% if @user.errors.any? %>
+              <ul>
+                <% @user.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            <% end %>
+          </div>
+        <% end %>
+        <%= form_with(model: @user, local: true) do |f| %>
+          <p class="form">
+            <%= f.label :ユーザー名 %>
+            <%= f.text_field :name,class:"btn-block" %>
+          </p>
+          <p class="form">
+            <%= f.label :自己紹介（30字以内）  %>
+            <%= f.text_area :introduction,class:"btn-block" %>
+          </p>
+          <p class="form">
+            <%= f.label :プロフィール画像 %>
+            <%=f.attachment_field :profile_image %>
+          </p>
+          <p class="update_btn">
+            <%= f.submit "更新",class:"btn btn-block btn-primary" %>
+          </p>
+        <% end %>
+      </div>
+      <div class="col-xs-1"></div>
+    </div>
 </div>
-<%= render 'posts/script', post: @post %>
