@@ -1,0 +1,26 @@
+<%= form_with model:@post, html:{name: 'form'} do |f| %>
+  <p class="form">
+    <%= f.label :推しメン選択 %>
+    <%= f.collection_select :member_id, Member.all, :id, :member,class:"select-controll" %>
+  </p>
+  <p class="form">
+    <%= f.label :タイトル %>
+    <%= f.text_field :title,class:"btn-block form-controll" %>
+  </p>
+  <p class="form">
+    <%= f.label :本文 %>
+    <%= f.text_area :caption,class:"btn-block form-controll" %>
+    <!-- idを加えることでgetElementById("select_file")をとれる。 -->
+  </p>
+  <p class="form">
+    <%= f.label :添付画像選択（複数投稿可） %>
+    <%= f.attachment_field :pictures_pictures, multiple: true, id:"select_image" %>
+  </p>
+  <p class="form">
+    <%= f.label :カテゴリー %>
+    <%= f.collection_select :category_id, Category.all, :id, :genre,class:"select-controll" %>
+  </p>
+  <div class="submit-button">
+    <%= f.submit "投稿する",class: "btn btn-primary btn-block post-button",id:"submit_button" %>
+  </div>
+<% end %>
