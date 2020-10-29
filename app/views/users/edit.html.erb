@@ -1,0 +1,12 @@
+<div class="row post-form">
+  <div class="col-xs-1"></div>
+  <div class=" col-xs-10">
+    <h3 class="new_post">投稿編集</h3>
+      <% if @post.errors.any? %>
+        <%= render 'posts/alert', post: @post %>
+      <% end %>
+    <%= render 'posts/form', post: @post %>
+  </div>
+  <div class="col-xs-1"></div>
+</div>
+<%= render 'posts/script', post: @post %>
