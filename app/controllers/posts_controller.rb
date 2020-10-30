@@ -25,6 +25,7 @@ class PostsController < ApplicationController
     @user = @post.user
     @category = @post.category
     @pictures = @post.pictures
+    @comment=Comment.new
   end
 
   def edit

@@ -1,0 +1,72 @@
+<div class="center-block">
+      <div class="adjustment">
+        <div class="panel panel-warning">
+          <div class="panel-heading comment-index">
+            コメント一覧
+          </div>
+          <!-- コメント投稿がある場合のみ下記を表記 -->
+          <% unless @post.comments.empty? %>
+            <div class="panel-body">
+              <table class="table table-hover comment-table">
+                <% @post.comments.each do |comment| %>
+                  <tr>
+                    <td>
+                      <%=link_to user_personal_path(comment.user.id) do %>
+                      <%=attachment_image_tag comment.user, :profile_image, size: "40x40", format: 'jpeg', fallback: "default.jpg" %>
+                      <%= comment.user.name %>
+                      <% end %>
+                    </td>
+                    <td>
+                      <%= comment.comment %>
+                    </td>
+                    <td>
+                      <i class="fas fa-star star-icon z"></i><%= comment.star %>
+                    </td>
+                    <td>
+                      <!-- ログイン時 -->
+                      <% if user_signed_in? %>
+                        <!-- current_userのみ表記 -->
+                        <% if @user == current_user %>
+                          <%=link_to "", post_comment_path(comment.post, comment),method: :delete,"data-confirm"=>"本当に削除しますか?", class:"fas fa-trash-alt y" %>
+                        <% end %>
+                      <% end %>
+                      <!-- ここまで -->
+                    </td>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
+          <% end %>
+          <!-- ここまで -->
+        </div>
+      </div>
+      <!-- ログイン時 -->
+      <% if user_signed_in? %>
+        <div class="forms">◎投稿フォーム</div>
+        <%=form_for [@post, @comment] do |f| %>
+          <%=f.text_area :comment, class:"btn-block" %>
+          <p class="form">
+            <%= f.label :画像 %>
+          </p>
+          <%= f.label :評価 %>
+          <span class="star"></span>
+          <%= f.hidden_field :star, id: :review_star %>
+          <div class="adjustment">
+            <%=f.submit "投稿",class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      <% end %>
+      <!-- ここまで -->
+</div>
+
+<script>
+  $('.star').raty({
+    size: 36, // 星のサイズ
+    score: "<%= @comment.star %>",//数値の代入
+    starOff: "<%=asset_path('star-off.png')%>",// 星なし
+    starOn: "<%=asset_path('star-on.png')%>",//星有り
+    starHalf: "<%=asset_path('star-half.png')%>",// 星半分
+    scoreName: 'review[star]',
+    half: true,// 星の半分の入力を実行
+  });
+</script>

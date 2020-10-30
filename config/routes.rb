@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   get 'user/personal/:id' => 'users#personal',as:"user_personal"
 
   resources :users, only: [:index, :show, :edit, :update]
-  resources :posts
+  resources :posts do
+    resources :comments, only:[:create, :destroy]
+  end
 
 
 end
