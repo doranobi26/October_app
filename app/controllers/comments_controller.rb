@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
     post = Post.find(params[:post_id])
     comment = post.comments.new(comment_params)
     comment.user_id = current_user.id
+    comment.star = params[:review][:star]
     comment.save
     redirect_to request.referer
   end
