@@ -17,6 +17,21 @@
             </span>
           <% end %>
         <% end %>
+        <div class=heart>
+          <% if user_signed_in? %>
+            <% if @post.niced_by?(current_user) %>
+              <%= link_to post_nices_path(@post.id), method: :delete, remote: :true do %>
+                <i class="fas fa-heart favorite"></i>
+                <%= @post.nices.count %>件
+              <% end %>
+            <% else %>
+              <%= link_to post_nices_path(@post.id), method: :post, remote: :true do %>
+                 <i class="far fa-heart favorite"></i>
+                 <%= @post.nices.count %>件
+              <% end %>
+            <% end %>
+          <% end %>
+      </div>
         <!-- ここまで -->
       </div>
     </div>
