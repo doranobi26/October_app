@@ -12,4 +12,16 @@ class Post < ApplicationRecord
   def niced_by?(user)
     nices.where(user_id: user.id).exists?
   end
+
+  def Post.search(search, user_or_post)
+    if user_or_post == "2"
+      if search == ""
+        Post.where(['title LIKE ?',"#{search}" ])
+      else
+        Post.where(['title LIKE ?', "%#{search}%"])
+      end
+    end
+  end
+
+  
 end
