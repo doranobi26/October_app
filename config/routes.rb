@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   root 'homes#top'
   get 'home/about' => 'homes#about'
   get 'user/personal/:id' => 'users#personal',as:"user_personal"
+  get 'user/favorite/:id' => 'users#favorite',as:"user_favorite"
+  get 'search' => 'searchs#search'
 
   resources :users, only: [:index, :show, :edit, :update] do
     resource :relationships, only: [:create, :destroy]
